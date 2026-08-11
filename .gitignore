@@ -1,0 +1,4 @@
+.vs/
+backend/poruke.db
+__pycache__/
+*.pyc

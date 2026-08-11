@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bogdan Šarčević | Frontend Developer</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="description" content="Bogdan Šarčević — web i grafički dizajner. Izrada sajtova, redizajn, vizuelni mokapi.">
+    <meta name="keywords" content="web dizajn, grafički dizajn, frontend developer, Srbija">
+    <meta property="og:title" content="Bogdan Šarčević | Frontend Developer">
+    <meta property="og:description" content="Web i grafički dizajner — izrada sajtova, redizajn, vizuelni mokapi.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0E17;
+            --panel: #111A2E;
+            --gold: #E8C468;
+            --text: #E7ECF3;
+            --muted: #8A93A8;
+            --border: #2A3450;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            line-height: 1.7;
+            background-image: radial-gradient(1px 1px at 20px 30px, rgba(232,196,104,.25) 1px, transparent 0), radial-gradient(1px 1px at 120px 80px, rgba(232,196,104,.2) 1px, transparent 0), radial-gradient(1px 1px at 60px 150px, rgba(232,196,104,.15) 1px, transparent 0);
+            background-size: 200px 200px;
+        }
+
+        h1, h2, h3, .pixel {
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        h1 {
+            font-size: 2rem;
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+        }
+
+        .hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+
+        /* LANG TOGGLE */
+        #lang-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            background: var(--panel);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Press Start 2P', monospace;
+            font-size: .65rem;
+            padding: .6rem .9rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+            #lang-toggle:hover {
+                filter: brightness(1.15);
+            }
+
+        /* BOOT SCREEN */
+        #boot {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity .5s ease;
+        }
+
+        .boot-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .boot-title {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .boot-line {
+            color: var(--muted);
+            font-size: .8rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+        }
+
+        #press-start {
+            display: none;
+            margin-top: 2rem;
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            color: #1A1508;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: .8rem;
+            cursor: pointer;
+        }
+
+            #press-start:hover {
+                filter: brightness(1.1);
+            }
+
+        /* HERO / PLAYER PROFILE */
+        .hero {
+            text-align: center;
+            padding-top: 4rem;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: var(--panel);
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .7rem;
+            color: var(--muted);
+            overflow: hidden;
+        }
+
+            .avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: .65rem;
+            letter-spacing: 2px;
+            margin-bottom: .8rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+            .stat .eyebrow {
+                margin-bottom: .5rem;
+            }
+
+            .stat .val {
+                font-size: 1.1rem;
+            }
+
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            font-family: 'Press Start 2P', monospace;
+            font-size: .7rem;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn-fill {
+            background: var(--gold);
+            color: #1A1508;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        /* SKILL TREE */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap: 1.2rem;
+        }
+
+        .skill-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+            .skill-card h3 {
+                font-size: .8rem;
+                color: var(--gold);
+                margin-bottom: 1rem;
+            }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+        }
+
+        .tag {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: .5rem .9rem;
+            font-size: .85rem;
+            color: var(--text);
+            background: rgba(255,255,255,.02);
+        }
+
+        /* EXPERIENCE */
+        .exp-item {
+            margin-bottom: 2.5rem;
+        }
+
+            .exp-item h3 {
+                font-size: .85rem;
+                color: var(--gold);
+                margin-bottom: .8rem;
+                line-height: 1.6;
+            }
+
+            .exp-item p {
+                color: var(--muted);
+                font-size: .9rem;
+            }
+
+        /* PROJECTS */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .project-screen {
+            aspect-ratio: 16/10;
+            background: #0D1424;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: .75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-body {
+            padding: 1.2rem 1.4rem;
+        }
+
+            .project-body h3 {
+                font-size: .85rem;
+                color: var(--gold);
+                margin-bottom: .6rem;
+            }
+
+            .project-body p {
+                color: var(--muted);
+                font-size: .85rem;
+                margin-bottom: 1rem;
+            }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-item .eyebrow {
+            margin-bottom: .6rem;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            word-break: break-all;
+            font-size: .85rem;
+        }
+
+            .contact-item a:hover {
+                color: var(--gold);
+            }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: .75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LANG TOGGLE -->
+    <button id="lang-toggle">EN</button>
+
+    <!-- BOOT SCREEN -->
+    <div id="boot">
+        <div class="boot-card">
+            <div class="boot-title">PLAYER ONE CV v1.0</div>
+            <div class="boot-line" id="l1">&gt; Booting system...</div>
+            <div class="boot-line" id="l2">&gt; Loading developer profile...</div>
+            <div class="boot-line" id="l3">&gt; Loading projects...</div>
+            <div class="boot-line" id="l4">&gt; Loading achievements...</div>
+            <div class="boot-line" id="l5" style="color:var(--gold)">&gt; STATUS: READY</div>
+            <button id="press-start">PRESS START</button>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="avatar">FOTO</div>
+        <div class="eyebrow">PLAYER</div>
+        <h1>Bogdan<br>Šarčević</h1>
+        <div class="stat-row">
+            <div class="stat">
+                <div class="eyebrow">CLASS</div>
+                <div class="val">Frontend Developer</div>
+            </div>
+            <div class="stat">
+                <div class="eyebrow">LEVEL</div>
+                <div class="val">23</div>
+            </div>
+        </div>
+        <div class="eyebrow">CURRENT QUEST</div>
+        <p id="quest-text" style="max-width:500px;margin:0 auto;">U potrazi za prvim klijentima — hajde da napravimo nešto zajedno.</p>
+        <div class="btn-row">
+            <a href="#kontakt" class="btn btn-fill" id="btn-contact">CONTACT ME</a>
+            <a href="cv-bogdan-sarcevic.pdf" class="btn btn-outline" download id="btn-cv">DOWNLOAD CV</a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section>
+        <h2>ABOUT ME</h2>
+        <p id="about-text">Ja sam Bogdan, imam 23 godine i živim u Srbiji. Web i grafički dizajn su moja stvar — sve sam učio sam, kroz kurseve i rad na projektima, a danas se snalazim sa Pythonom, Javom, HTML-om i CSS-om. Najviše volim kad dizajn i kod idu ruku pod ruku — da sajt ne samo lepo izgleda, nego i radi kako treba. Uvek sam za novi projekat, veliki ili mali.</p>
+    </section>
+
+    <!-- SKILL TREE -->
+    <section>
+        <h2>SKILL TREE</h2>
+        <div class="skill-grid">
+            <div class="skill-card">
+                <h3>Programming</h3>
+                <div class="tags">
+                    <span class="tag">C++</span><span class="tag">C#</span>
+                    <span class="tag">Java</span><span class="tag">JavaScript</span>
+                    <span class="tag">Python</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Web Development</h3>
+                <div class="tags">
+                    <span class="tag">HTML5</span><span class="tag">CSS3</span>
+                    <span class="tag">React</span><span class="tag">WordPress</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>UI / Graphic Design</h3>
+                <div class="tags">
+                    <span class="tag">Figma</span><span class="tag">Photoshop</span>
+                    <span class="tag">Illustrator</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>Tools</h3>
+                <div class="tags">
+                    <span class="tag">Git</span><span class="tag">GitHub</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section>
+        <h2>EXPERIENCE</h2>
+        <div class="exp-item">
+            <p id="exp-text">Sve što znam, naučio sam sam — kroz YouTube tutorijale, freeCodeCamp i razne online kurseve. Tako sam savladao osnove Pythona, Jave, HTML-a i CSS-a, i nastavljam da učim nove stvari usput.</p>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section>
+        <h2>PROJECTS</h2>
+        <p id="projects-text" style="text-align:center; color:var(--muted);">Trenutno radim na svojim prvim projektima — uskoro će biti prikazani ovde.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="kontakt">
+        <h2>CONTACT</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <div class="eyebrow">EMAIL</div>
+                <a href="mailto:sarcevicbogdan258@gmail.com">sarcevicbogdan258@gmail.com</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="eyebrow">UPWORK</div>
+                <a href="https://www.upwork.com/freelancers/~019d6f59b2736eb644" target="_blank" rel="noopener">upwork.com/freelancers/~019d6f59b2736eb644</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="eyebrow">LINKEDIN</div>
+                <a href="https://www.linkedin.com/in/bogdan-sarcevic-4ba197425/" target="_blank" rel="noopener">linkedin.com/in/bogdan-sarcevic</a>
+            </div>
+        </div>
+
+        <form id="kontakt-forma" style="max-width:500px;margin:3rem auto 0;">
+            <input type="text" id="f-website" name="website" style="position:absolute; left:-9999px;" tabindex="-1" autocomplete="off">
+            <div style="margin-bottom:1.2rem;">
+                <label id="label-ime" style="display:block;font-size:.75rem;color:var(--gold);margin-bottom:.5rem;">IME</label>
+                <input type="text" id="f-ime" required style="width:100%;padding:.8rem;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;">
+            </div>
+            <div style="margin-bottom:1.2rem;">
+                <label id="label-email" style="display:block;font-size:.75rem;color:var(--gold);margin-bottom:.5rem;">EMAIL</label>
+                <input type="email" id="f-email" required style="width:100%;padding:.8rem;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;">
+            </div>
+            <div style="margin-bottom:1.2rem;">
+                <label id="label-poruka" style="display:block;font-size:.75rem;color:var(--gold);margin-bottom:.5rem;">PORUKA</label>
+                <textarea id="f-poruka" required rows="4" style="width:100%;padding:.8rem;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;resize:vertical;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-fill" id="btn-submit" style="width:100%;border:none;cursor:pointer;">POŠALJI</button>
+            <p id="f-status" style="margin-top:1rem;font-size:.85rem;text-align:center;"></p>
+        </form>
+    </section>
+
+    <footer>&copy; 2026 Bogdan Šarčević</footer>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:5000/api/kontakt';
+
+        const translations = {
+            sr: {
+                langBtn: 'EN',
+                quest: 'U potrazi za prvim klijentima — hajde da napravimo nešto zajedno.',
+                contactBtn: 'CONTACT ME',
+                cvBtn: 'DOWNLOAD CV',
+                about: 'Ja sam Bogdan, imam 23 godine i živim u Srbiji. Web i grafički dizajn su moja stvar — sve sam učio sam, kroz kurseve i rad na projektima, a danas se snalazim sa Pythonom, Javom, HTML-om i CSS-om. Najviše volim kad dizajn i kod idu ruku pod ruku — da sajt ne samo lepo izgleda, nego i radi kako treba. Uvek sam za novi projekat, veliki ili mali.',
+                exp: 'Sve što znam, naučio sam sam — kroz YouTube tutorijale, freeCodeCamp i razne online kurseve. Tako sam savladao osnove Pythona, Jave, HTML-a i CSS-a, i nastavljam da učim nove stvari usput.',
+                projects: 'Trenutno radim na svojim prvim projektima — uskoro će biti prikazani ovde.',
+                labelIme: 'IME',
+                labelEmail: 'EMAIL',
+                labelPoruka: 'PORUKA',
+                submitBtn: 'POŠALJI',
+                sending: 'Šaljem...',
+                success: 'Poruka uspešno poslata!',
+                error: 'Greška — proveri da li server radi.'
+            },
+            en: {
+                langBtn: 'SR',
+                quest: "Looking for my first clients — let's build something together.",
+                contactBtn: 'CONTACT ME',
+                cvBtn: 'DOWNLOAD CV',
+                about: "I'm Bogdan, 23 years old, based in Serbia. Web and graphic design are my thing — I taught myself everything through courses and hands-on projects, and today I work with Python, Java, HTML and CSS. I love it most when design and code work hand in hand — a site that not only looks good but actually works right. Always up for a new project, big or small.",
+                exp: "Everything I know, I learned on my own — through YouTube tutorials, freeCodeCamp, and various online courses. That's how I picked up the basics of Python, Java, HTML and CSS, and I keep learning new things along the way.",
+                projects: "Currently working on my first projects — they'll be shown here soon.",
+                labelIme: 'NAME',
+                labelEmail: 'EMAIL',
+                labelPoruka: 'MESSAGE',
+                submitBtn: 'SEND',
+                sending: 'Sending...',
+                success: 'Message sent successfully!',
+                error: 'Error — check if the server is running.'
+            }
+        };
+
+        let currentLang = 'sr';
+
+        function applyLang(lang) {
+            const t = translations[lang];
+            document.getElementById('quest-text').textContent = t.quest;
+            document.getElementById('btn-contact').textContent = t.contactBtn;
+            document.getElementById('btn-cv').textContent = t.cvBtn;
+            document.getElementById('about-text').textContent = t.about;
+            document.getElementById('exp-text').textContent = t.exp;
+            document.getElementById('projects-text').textContent = t.projects;
+            document.getElementById('label-ime').textContent = t.labelIme;
+            document.getElementById('label-email').textContent = t.labelEmail;
+            document.getElementById('label-poruka').textContent = t.labelPoruka;
+            document.getElementById('btn-submit').textContent = t.submitBtn;
+            document.getElementById('lang-toggle').textContent = t.langBtn;
+            document.documentElement.lang = lang;
+            currentLang = lang;
+        }
+
+        document.getElementById('lang-toggle').addEventListener('click', () => {
+            applyLang(currentLang === 'sr' ? 'en' : 'sr');
+        });
+
+        const lines = ['l1', 'l2', 'l3', 'l4', 'l5'];
+        lines.forEach((id, i) => {
+            setTimeout(() => {
+                document.getElementById(id).style.opacity = 1;
+                if (id === 'l5') {
+                    setTimeout(() => {
+                        document.getElementById('press-start').style.display = 'block';
+                    }, 400);
+                }
+            }, i * 500);
+        });
+
+        document.getElementById('press-start').addEventListener('click', () => {
+            const boot = document.getElementById('boot');
+            boot.style.opacity = '0';
+            setTimeout(() => boot.style.display = 'none', 500);
+        });
+
+        document.getElementById('kontakt-forma').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const ime = document.getElementById('f-ime').value;
+            const email = document.getElementById('f-email').value;
+            const poruka = document.getElementById('f-poruka').value;
+            const website = document.getElementById('f-website').value;
+            const status = document.getElementById('f-status');
+            const dugme = this.querySelector('button[type="submit"]');
+            const t = translations[currentLang];
+
+            status.style.color = 'var(--muted)';
+            status.textContent = t.sending;
+            dugme.disabled = true;
+
+            fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ime: ime, email: email, poruka: poruka, website: website })
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error('Server error');
+                    return res.json();
+                })
+                .then(data => {
+                    status.style.color = 'var(--gold)';
+                    status.textContent = t.success;
+                    document.getElementById('kontakt-forma').reset();
+                })
+                .catch(err => {
+                    status.style.color = '#E24B4A';
+                    status.textContent = t.error;
+                })
+                .finally(() => {
+                    dugme.disabled = false;
+                });
+        });
+    </script>
+
+</body>
+</html>
