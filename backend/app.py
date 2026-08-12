@@ -105,7 +105,8 @@ def prikazi_poruke():
 
     return jsonify(poruke)
 
+init_db()
+
 if __name__ == '__main__':
-    init_db()
     debug_mode = os.environ.get("FLASK_DEBUG", "1") == "1"
     app.run(debug=debug_mode, port=5000)
