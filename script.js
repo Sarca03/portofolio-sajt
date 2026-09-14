@@ -32,7 +32,7 @@ function playBeep(frequency = 440, duration = 0.05, type = 'square') {
 }
 
 /* ============================================
-   LIVE SAT (odmah se prikazuje, bez 1s čekanja)
+   LIVE SAT
    ============================================ */
 function updateClock() {
     const now = new Date();
@@ -76,7 +76,6 @@ function openWindow(windowId) {
     if (!win) return;
     win.classList.remove('hidden');
 
-    // Novi prozor ide u prvi plan
     topZIndex++;
     win.style.zIndex = topZIndex;
 }
@@ -107,7 +106,6 @@ function initDrag(e) {
     activeWindow.style.left = rect.left + 'px';
     activeWindow.style.top = rect.top + 'px';
 
-    // Prozor koji se pomera ide u prvi plan
     topZIndex++;
     modalBox.style.zIndex = topZIndex;
 
@@ -132,7 +130,6 @@ function onDrag(e) {
     let newX = clientX - offsetX;
     let newY = clientY - offsetY;
 
-    // Ograniči pomeranje - bar 60px prozora mora ostati vidljivo
     const minVisible = 60;
     const maxX = window.innerWidth - minVisible;
     const maxY = window.innerHeight - minVisible;
@@ -145,7 +142,7 @@ function onDrag(e) {
     activeWindow.style.top = newY + 'px';
 
     if (e.type === 'touchmove') {
-        e.preventDefault(); // Sprečava skrolovanje stranice dok se pomera prozor prstom
+        e.preventDefault();
     }
 }
 
@@ -183,16 +180,16 @@ function handleTerminal(e) {
             response = `> Dostupne komande: about, skills, projects, contact, clear`;
         } else if (val === 'about') {
             openWindow('about-window');
-            response = `> Otvaram prozor: o_meni.exe`;
+            response = `> Otvaram prozor: O meni`;
         } else if (val === 'skills') {
             openWindow('skills-window');
-            response = `> Otvaram prozor: skill_tree.sys`;
+            response = `> Otvaram prozor: Skill tree`;
         } else if (val === 'projects') {
             openWindow('projects-window');
-            response = `> Otvaram prozor: projekti.dir`;
+            response = `> Otvaram prozor: Projekti`;
         } else if (val === 'contact') {
             openWindow('contact-window');
-            response = `> Otvaram prozor: kontakt.bat`;
+            response = `> Otvaram prozor: Kontakt`;
         } else if (val === 'clear') {
             response = `> Terminal očišćen.`;
         }
@@ -209,10 +206,10 @@ let currentLang = 'sr';
 const translations = {
     sr: {
         intro_title: "BOGDAN OS v1.0",
-        icon_about: "o_meni.exe",
-        icon_skills: "skill_tree.sys",
-        icon_projects: "projekti.dir",
-        icon_contact: "kontakt.bat",
+        icon_about: "O meni",
+        icon_skills: "Skill tree",
+        icon_projects: "Projekti",
+        icon_contact: "Kontakt",
         about_subtitle: "Full-Stack Developer & UI/UX Designer",
         about_text: "Kombinujem estetiku grafičkog dizajna i logiku programiranja. Gradim brza, moderna i unikatna web rešenja od nule, sa posebnim akcentom na detalje i korisničko iskustvo.",
         proj_desc1: "Moderan interfejs razvijen sa fokusom na performanse, prilagođen za sve uređaje.",
@@ -221,10 +218,10 @@ const translations = {
     },
     en: {
         intro_title: "BOGDAN OS v1.0",
-        icon_about: "about_me.exe",
-        icon_skills: "skill_tree.sys",
-        icon_projects: "projects.dir",
-        icon_contact: "contact.bat",
+        icon_about: "About me",
+        icon_skills: "Skill tree",
+        icon_projects: "Projects",
+        icon_contact: "Contact",
         about_subtitle: "Full-Stack Developer & UI/UX Designer",
         about_text: "I combine graphic design aesthetics with programming logic. I build fast, modern, and unique web solutions from scratch, with a strong focus on details and user experience.",
         proj_desc1: "Modern interface developed with a focus on performance, optimized for all devices.",
@@ -237,7 +234,7 @@ const langBtn = document.getElementById('lang-btn');
 
 function applyLanguage(lang) {
     currentLang = lang;
-    document.documentElement.lang = lang; // Ažurira <html lang="">
+    document.documentElement.lang = lang;
     langBtn.textContent = lang === 'sr' ? 'EN / SR' : 'SR / EN';
 
     document.querySelectorAll('[data-translate]').forEach(el => {
@@ -247,7 +244,6 @@ function applyLanguage(lang) {
         }
     });
 
-    // Zapamti izbor
     localStorage.setItem('preferredLang', lang);
 }
 
@@ -257,7 +253,6 @@ langBtn.addEventListener('click', () => {
     applyLanguage(newLang);
 });
 
-// Prilikom učitavanja - vrati sačuvani jezik (ako postoji)
 const savedLang = localStorage.getItem('preferredLang');
 if (savedLang && translations[savedLang]) {
     applyLanguage(savedLang);
