@@ -1,0 +1,49 @@
+/* CRT Scanlines efekat preko celog ekrana */
+.scanlines {
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+    ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.03),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.03)
+    );
+    background-size: 100% 3px, 6px 100%;
+}
+
+/* Retro senke za prozore i panele */
+.retro-shadow {
+    box-shadow: 6px 6px 0px rgba(245, 158, 11, 0.3);
+}
+
+/* Custom scrollbar u retro stilu */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+    border: 1px solid #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f59e0b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d97706;
+}
+
+/* Poštuj korisnike sa smanjenom animacijom (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+    .scanlines {
+        background: none !important;
+    }
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
